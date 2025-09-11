@@ -78,6 +78,16 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Jumpscare full screen inside page */
+    #jumpscare video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
@@ -91,7 +101,6 @@
   <script>
     const allowedRef = "https://linkvertise.com/";
     const referrer = document.referrer;
-
     const output = document.getElementById("output");
 
     if (referrer.includes(allowedRef)) {
@@ -99,15 +108,27 @@
         <h1>Access Granted</h1>
         <p>This is Checkpoint 1/1.</p>
         <p>You came from the correct site.</p>
-        <button1 class="button" onclick="window.location.href='https://link-center.net/1314916/ofNGEdrJwIMs'">Continue to MainHub</button1>
-        <button2 class="button" onclick="window.location.href='https://link-center.net/1314916/tQFSnoUChWHW'">Continue to AutoRob</button2>
-        `;
-      
+        <button class="button" onclick="window.location.href='https://link-center.net/1314916/ofNGEdrJwIMs'">Continue to MainHub</button>
+        <button class="button" onclick="window.location.href='https://link-center.net/1314916/tQFSnoUChWHW'">Continue to AutoRob</button>
+      `;
     } else {
+      // Erst kurze Fehlermeldung
       output.innerHTML = `
         <h1>Access Denied</h1>
         <p>You must visit this page from Linkvertise to proceed.</p>
       `;
+
+      // Nach 1 Sekunden Jumpscare abspielen
+      setTimeout(() => {
+        output.innerHTML = `
+          <div id="jumpscare">
+            <video autoplay>
+              <source src="jumpscare.mp4" type="video/mp4">
+              Your Browser does not support MP4.
+            </video>
+          </div>
+        `;
+      }, 1000);
     }
   </script>
 
