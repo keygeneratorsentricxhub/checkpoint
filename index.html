@@ -1,136 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Checkpoint</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkpoint</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --bg-primary: #0a0d14;
+        --bg-secondary: #151b26;
+        --accent-pink: #8793ff;
+        --text-primary: #ffffff;
+        --text-secondary: #8b94a8;
+        --error-color: #ff4d4d;
+        --success-color: #4ade80;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      background-color: #0d0d0d;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      margin: 0;
-      position: relative;
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #1a2332 0%, #0f1419 50%, #0a0d14 100%);
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .waves {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      background: repeating-linear-gradient(
-        135deg,
-        rgba(255, 0, 150, 0.1) 0px,
-        rgba(255, 0, 150, 0.1) 2px,
-        transparent 2px,
-        transparent 20px
-      );
-      mask-image: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 80%);
-      animation: moveWaves 15s linear infinite;
-      background-repeat: repeat;
-      background-size: 200% 200%;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        background: repeating-linear-gradient(
+            135deg,
+            rgba(255, 0, 150, 0.1) 0px,
+            rgba(255, 0, 150, 0.1) 2px,
+            transparent 2px,
+            transparent 20px
+        );
+        mask-image: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 80%);
+        animation: moveWaves 15s linear infinite;
+        background-repeat: repeat;
+        background-size: 200% 200%;
     }
 
     @keyframes moveWaves {
-      0% { background-position: 0 0; }
-      100% { background-position: 100% 100%; }
+        0% { background-position: 0 0; }
+        100% { background-position: 100% 100%; }
     }
 
-    .message {
-      text-align: center;
-      animation: fadeIn 2s ease-in-out;
-      z-index: 1;
+    .hero {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 600px;
+        padding: 40px;
+        background: rgba(30,35,45,0.9);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        backdrop-filter: blur(20px);
+        animation: fadeInUp 0.6s ease forwards;
     }
 
-    .message h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    .message p {
-      font-size: 1.2em;
-      opacity: 0.7;
+    .hero h1 { font-size: 3rem; margin-bottom: 20px; color: var(--accent-pink); }
+    .hero p { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 30px; }
+
+    .btn {
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-    .button {
-      margin-top: 2em;
-      padding: 1em 2em;
-      background-color: #111111;
-      border: white 2px solid;
-      border-radius: 10px;
-      font-size: 1em;
-      color: rgb(255, 75, 210);
-      cursor: pointer;
-      animation: fadeIn 3s ease-in-out;
+    .btn-primary {
+        background: var(--accent-pink);
+        color: white;
+        box-shadow: 0 4px 20px rgba(120, 201, 255, 0.3);
     }
 
-    .button:hover {
-      background-color: #000000;
+    .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(120, 201, 255, 0.4);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        margin-top: 20px;
     }
 
-    /* Jumpscare full screen inside page */
+    /* Jumpscare full screen */
     #jumpscare video {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 9999;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 9999;
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="waves"></div>
+<div class="waves"></div>
 
-  <div class="message" id="output">
-    <!-- Dynamischer Inhalt kommt hier rein -->
-  </div>
+<div class="hero" id="output">
+    <!-- Dynamischer Inhalt -->
+</div>
 
-  <script>
+<script>
     const allowedRef = "https://linkvertise.com/";
     const referrer = document.referrer;
     const output = document.getElementById("output");
 
-    if (referrer.includes(allowedRef)) {
-      output.innerHTML = `
-        <h1>Access Granted</h1>
-        <p>This is Checkpoint 1/1.</p>
-        <p>You came from the correct site.</p>
-        <button class="button" onclick="window.location.href='https://link-center.net/1314916/ofNGEdrJwIMs'">Continue to MainHub</button>
-        <button class="button" onclick="window.location.href='https://link-center.net/1314916/tQFSnoUChWHW'">Continue to AutoRob</button>
-      `;
-    } else {
-      // Erst kurze Fehlermeldung
-      output.innerHTML = `
-        <h1>Access Denied</h1>
-        <p>You must visit this page from Linkvertise to proceed.</p>
-      `;
-
-      // Nach 1 Sekunden Jumpscare abspielen
-      setTimeout(() => {
+    if(referrer.includes(allowedRef)) {
         output.innerHTML = `
-          <div id="jumpscare">
-            <video autoplay>
-              <source src="jumpscare.mp4" type="video/mp4">
-              Your Browser does not support MP4.
-            </video>
-          </div>
+            <h1>Access Granted</h1>
+            <h3>Checkpoint 1/1</h3>
+            <p>You came from the correct site.</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="window.location.href='https://link-center.net/1314916/ofNGEdrJwIMs'">
+                    <i class="fas fa-arrow-right"></i> Continue
+                </button>
+            </div>
         `;
-      }, 1000);
+    } else {
+        output.innerHTML = `
+            <h1>Access Denied</h1>
+            <p>You must visit this page from Linkvertise to proceed.</p>
+        `;
+        setTimeout(() => {
+            output.innerHTML = `
+                <div id="jumpscare">
+                    <video autoplay>
+                        <source src="jumpscare.mp4" type="video/mp4">
+                        Your browser does not support MP4.
+                    </video>
+                </div>
+            `;
+        }, 1000);
     }
-  </script>
+</script>
 
 </body>
 </html>
